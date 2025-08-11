@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hiking in Nepal</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="container nav-content">
+      <div class="logo"><a href="#home" style="color:inherit; text-decoration:none;">Hiking Nepal</a></div>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#packages">Packages</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="hero" id="home">
+    <div class="container hero-content">
+      <h1>Explore the Himalayas</h1>
+      <p>Discover breathtaking trails, ancient cultures, and the adventure of a lifetime in Nepal.</p>
+      <a href="#packages" class="cta-btn">View Packages</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="packages-section" id="packages">
+      <div class="container">
+        <h2>Our Trekking Packages</h2>
+        <div class="card-grid">
+          <div class="card">
+            <img src="images/EBC1.jpg" alt="Everest Base Camp" />
+            <h3>Everest Base Camp</h3>
+            <p>Journey to the base of the world's highest peak. 14 days of adventure and culture.</p>
+            <button class="card-btn" onclick="showItinerary('everest')">Read More</button>
+          </div>
+          <div class="card">
+            <img src="images/annapurna.jpg" alt="Annapurna Circuit" />
+            <h3>Annapurna Circuit</h3>
+            <p>Circle the Annapurna massif through lush forests and mountain passes. 16 days.</p>
+            <button class="card-btn" onclick="showItinerary('annapurna')">Read More</button>
+          </div>
+          <div class="card">
+            <img src="images/langtang.jpg" alt="Langtang Valley" />
+            <h3>Langtang Valley</h3>
+            <p>Scenic trek close to Kathmandu with rich Tamang culture. 10 days.</p>
+            <button class="card-btn" onclick="showItinerary('langtang')">Read More</button>
+          </div>
+          <div class="card">
+            <img src="images/mustang.jpg" alt="Upper Mustang" />
+            <h3>Upper Mustang</h3>
+            <p>Explore the hidden kingdom of Mustang, its caves, and unique landscapes. 12 days.</p>
+            <button class="card-btn" onclick="showItinerary('mustang')">Read More</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section" id="about">
+      <div class="container about-flex">
+        <div class="about-credentials">
+          <img src="images/safal-certificate.jpg" alt="Credential 1" class="about-credential-img"
+            onclick="showCredentialModal('images/safal-certificate.jpg')" style="cursor:pointer;" />
+          <img src="images/credential.jpeg" alt="Credential 2" class="about-credential-img"
+            onclick="showCredentialModal('images/credential.jpeg')" style="cursor:pointer;" />
+        </div>
+        <div class="about-description">
+          <h2>About Us</h2>
+          <p>We are passionate trekkers and guides with decades of experience in the Himalayas. Our mission is
+            to share the beauty and culture of Nepal with adventurers from around the world. Our guides are
+            certified, experienced, and dedicated to your safety and enjoyment. Join us for an unforgettable
+            journey!</p>
+        </div>
+        <div class="about-guide">
+          <img src="images/safal.jpg" alt="Your Guide" class="about-guide-img" />
+          <p class="guide-caption">Safal, Lead Guide</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+      <div class="container">
+        <h2>Contact</h2>
+        <div class="contact-links">
+          <div class="contact-method">
+            <div>Send us a WhatsApp:</div>
+            <a href="https://wa.me/9779809571717?text=Hi%20Safal%2C%20I'm%20interested%20in%20trekking%20in%20Nepal."
+              target="_blank" rel="noopener">+977 980-9571717</a>
+          </div>
+          <div class="contact-method">
+            <div>Or an Email:</div>
+            <a href="mailto:nepsafal@gmail.com">nepsafal@gmail.com</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      &copy; <span id="currentYear"></span> Hiking Nepal. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- Modal for itineraries -->
+  <div id="itineraryModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <!-- Credential Modal -->
+  <div id="credentialModal" class="modal">
+    <span class="close" onclick="closeCredentialModal()">&times;</span>
+    <img id="credentialModalImg" class="modal-img" src="" alt="Credential Large View" />
+  </div>
+
+  <script>
+    const itineraries = {
+      everest: {
+        title: "Everest Base Camp Trek",
+        duration: "14 Days",
+        difficulty: "Moderate to Challenging",
+        maxAltitude: "5,364m (17,598ft)",
+        itinerary: `
+          <h3>Day-by-Day Itinerary</h3>
+          <div class="itinerary-days">
+            <div class="day">
+              <strong>Day 1:</strong> Scenic flight to Lukla (2845m)and trek to Phakding (2,610m) Duration: 4-5 hours, 8km
+            </div>
+            <div class="day">
+              <strong>Day 2:</strong> Trek from Phakding to Namche Bazaar (3,440m) Duration: 5-6 hours, 11km
+            </div>
+            <div class="day">
+              <strong>Day 3:</strong> Acclimatization day at Namche Bazaar.
+            </div>
+            <div class="day">
+              <strong>Day 4:</strong> Trek from Namche to Pangboche (3,930m) Duration: 6-7 hours, 9.5km
+            </div>
+            <div class="day">
+              <strong>Day 5:</strong> Trek from Pengboche to Dingboche (4410m) Duration: 6-7 hours, 7km
+            </div>
+            <div class="day">
+              <strong>Day 6:</strong> Acclimatization at Dingboche.
+            </div>
+            <div class="day">
+              <strong>Day 7:</strong> Trek from Dingboche to Lobuche
+(4910m) Duration: 5-6 hours 7km
+            </div>
+            <div class="day">
+              <strong>Day 8:</strong> Trek from Lobuche to Gorakshep (5160m) to Everest Base Camp (5364m) back to Gorakshep. Duration: 8-9 hours 14km
+            </div>
+            <div class="day">
+              <strong>Day 9:</strong> Hike upto Kala patthar (5550m) From Gorakshep and back to Pheriche(4230m) Duration: 8-9 hours 15km
+            </div>
+            <div class="day">
+              <strong>Day 10:</strong> Pheriche to Namche Bazzar (3440m) 
+            </div>
+            <div class="day">
+              <strong>Day 11:</strong> Namche bazzar to Luka (2845m) Duration: 8-9 hours 19km
+            </div>
+            <div class="day">
+              <strong>Day 12:</strong> Flight back to Lukla
+            </div>
+          </div>
+          <div class="package-details">
+            <h4>Package Includes:</h4>
+            <ul>
+              <li>All permits and fees</li>
+              <li>Experienced guide</li>
+              <li>Accommodation in teahouses</li>
+              <li>All meals during trek</li>
+              <li>Domestic flights</li>
+              <li>Transportation</li>
+            </ul>
+          </div>
+        `
+      },
+      annapurna: {
+        title: "Annapurna Base Camp Trek",
+        duration: "13 Days",
+        difficulty: "Moderate to Challenging",
+        maxAltitude: "5,416m (17,769ft)",
+        itinerary: `
+          <h3>Day-by-Day Itinerary</h3>
+          <div class="itinerary-days">
+            <div class="day">
+              <strong>Day 1:</strong> Arrival at Kathmandu and transfer to hotel
+            </div>
+            <div class="day">
+              <strong>Day 2:</strong> Drive from Kathmandu to Pokhara (8,50m) Duration: 6-7 hours.
+            </div>
+            <div class="day">
+              <strong>Day 3:</strong> Drive from Pokhara to Nayapul & trek to Ulleri (1,900m) Duration: 6-7 hours.
+            </div>
+            <div class="day">
+              <strong>Day 4:</strong> Trek from Ulleri to Ghorepani (2,860m) Duration: 5-6 hours.
+            </div>
+            <div class="day">
+              <strong>Day 5:</strong> Hike up to Poon Hill viewpoint (3,210m) & to Chuile (2,710m) Duration: 6-7 hours.
+            </div>
+            <div class="day">
+              <strong>Day 6:</strong> Trek from Chuile to upper Sinuwa (2360m) Duration: 5-6 hours.
+            </div>
+            <div class="day">
+              <strong>Day 7:</strong> Trek from Sinuwa to Deurali (3,200m) Duration: 5-6 hours.
+            </div>
+            <div class="day">
+              <strong>Day 8:</strong> Trek from Deurali to ABC (4,120m) Duration: 5-6 hours.
+            </div>
+            <div class="day">
+              <strong>Day 9:</strong> Trek from ABC to Bamboo (2,400m) Duration: 5-6 hours.
+            </div>
+            <div class="day">
+              <strong>Day 10:</strong> Trek from Bamboo to Jhinu Danda (hot spring) (1760m) via Chomrong; Duration: 5-6 hours.
+            </div>
+            <div class="day">
+              <strong>Day 11:</strong> Trek from Jhinu Danda to Nayapul & drive to Pokhara (8,20m) Duration: 6-7 hours.
+            </div>
+            <div class="day">
+              <strong>Day 12:</strong> Drive from Pokhara to Kathmandu; Duration: 6-7 hours.
+            </div>
+            <div class="day">
+              <strong>Day 13:</strong> International departure from Kathmandu Airport.
+            </div>
+          </div>
+          <div class="package-details">
+            <h4>Package Includes:</h4>
+            <ul>
+              <li>All permits and fees</li>
+              <li>Experienced guide</li>
+              <li>Accommodation in teahouses</li>
+              <li>All meals during trek</li>
+              <li>Domestic flights</li>
+              <li>Transportation</li>
+            </ul>
+          </div>
+        `
+      },
+      langtang: {
+        title: "Mera peak climbing Trek",
+        duration: "15 Days",
+        difficulty: "Moderate",
+        maxAltitude: "4,984m (16,351ft)",
+        itinerary: `
+          <h3>Day-by-Day Itinerary</h3>
+          <div class="itinerary-days">
+            <div class="day">
+              <strong>Day 1:</strong> Arrival at Kathmandu Airport [1345m/4411ft] & transfer to hotel.
+            </div>
+            <div class="day">
+              <strong>Day 2:</strong> Fly from Kathmandu to Lukla and trek to Chhutang [2800m/9184ft] Duration: 3- 5 hours
+            </div>
+            <div class="day">
+              <strong>Day 3:</strong> Trek from Chhuthang to Tuli Kharka [4100m/13448ft] Duration: 5-6 hours.
+            </div>
+            <div class="day">
+              <strong>Day 4:</strong> Trek from Tuli Kharka to Kothe [3580 m | 11,745 ft] Duration: 6-7 hours.
+            </div>
+            <div class="day">
+              <strong>Day 5:</strong> Trek from Kothe to Thangnak [4326m/14189ft] Duration: 4-5 hours.
+            </div>
+            <div class="day">
+              <strong>Day 6:</strong> Trek from Thangnak to Khare [5000m/16400ft] Duration: 3 hours.
+            </div>
+            <div class="day">
+              <strong>Day 7:</strong> Acclimatization day at Khare.
+            </div>
+            <div class="day">
+              <strong>Day 8:</strong> Trek to Mera High Camp [5700m/18696ft] Duration: 3-4 hours.
+            </div>
+            <div class="day">
+              <strong>Day 9:</strong> Summit Mera Peak [6461m/21192ft] and descend to Khare Duration: 8-9 hours.
+            </div>
+            <div class="day">
+              <strong>Day 10:</strong> Reserve day in case of bad weather
+            </div>
+            <div class="day">
+              <strong>Day 11:</strong> Trek back from Khare to Kothe Duration: 4-5 hours.
+            </div>
+            <div class="day">
+              <strong>Day 12:</strong> Trek from Kothe to Tuli Kharka Duration: 5-6 hours.
+            </div>
+            <div class="day">
+              <strong>Day 13:</strong> Trek from Tuli Kharka to Lukla via Zatrawala Pass Duration 6-7 hours.
+            </div>
+            <div class="day">
+              <strong>Day 14:</strong> Flight back from Lukla to Kathmandu.
+            </div>
+            <div class="day">
+              <strong>Day 15:</strong> International departure from Kathmandu.
+            </div>
+          </div>
+          <div class="package-details">
+            <h4>Package Includes:</h4>
+            <ul>
+              <li>All permits and fees</li>
+              <li>Experienced guide</li>
+              <li>Accommodation in teahouses</li>
+              <li>All meals during trek</li>
+              <li>Transportation</li>
+              <li>Airport transfers</li>
+            </ul>
+          </div>
+        `
+      },
+      mustang: {
+        title: "Gokyo Valley Trek",
+        duration: "13 Days",
+        difficulty: "Moderate",
+        maxAltitude: "3,800m (12,467ft)",
+        itinerary: `
+          <h3>Day-by-Day Itinerary</h3>
+          <div class="itinerary-days">
+            <div class="day">
+              <strong>Day 1:</strong> Arrival at Tribhuvan International Airport (TIA), Kathmandu.
+            </div>
+            <div class="day">
+              <strong>Day 2:</strong> Guided Sightseeing in the Kathmandu Valley.
+            </div>
+            <div class="day">
+              <strong>Day 3:</strong> Fly to Lukla and trek to Phakding (2610m) Duration: 4-5 hours.
+            </div>
+            <div class="day">
+              <strong>Day 4:</strong> Trek to Namche Bazaar (3440m) Duration: 5-6 hours.
+            </div>
+            <div class="day">
+              <strong>Day 5:</strong> Rest day at Namche Bazaar. (Hike to Everest View hotel) Duration: 3-4 hours.
+            </div>
+            <div class="day">
+              <strong>Day 6:</strong> Trek to Dole (4190m) Duration: 5- 6 hours.
+            </div>
+            <div class="day">
+              <strong>Day 7:</strong> Trek to Machhermo (4470m) Duration: 3-4 hours.
+            </div>
+            <div class="day">
+              <strong>Day 8:</strong> Trek to Gokyo (4790m) Duration: 4-5 hours.
+            </div>
+            <div class="day">
+              <strong>Day 9:</strong> Trek to Gokyo Ri (5357m) and on to Machhermo (4470m) Duration: 6-7 hours.
+            </div>
+            <div class="day">
+              <strong>Day 10:</strong> Trek to Namche Bazaar (3,440m) Duration: 5-6 hours.
+            </div>
+            <div class="day">
+              <strong>Day 11:</strong> Trek to Lukla (2,860m) Duration: 6-7 hours.
+            </div>
+            <div class="day">
+              <strong>Day 12:</strong> Fly back to Kathmandu (Duration: 30 minutes flight)
+            </div>
+            <div class="day">
+              <strong>Day 13:</strong> Transfer to Tribhuvan International Airport.
+            </div>
+          </div>
+          <div class="package-details">
+            <h4>Package Includes:</h4>
+            <ul>
+              <li>All permits and fees</li>
+              <li>Experienced guide</li>
+              <li>Accommodation in teahouses</li>
+              <li>All meals during trek</li>
+              <li>Domestic flights</li>
+              <li>Transportation</li>
+            </ul>
+          </div>
+        `
+      }
+    };
+
+    function showItinerary(packageId) {
+      const package = itineraries[packageId];
+      const modal = document.getElementById('itineraryModal');
+      const content = document.getElementById('modalContent');
+
+      content.innerHTML = `
+        <h2>${package.title}</h2>
+        <div class="package-info">
+          <p><strong>Duration:</strong> ${package.duration}</p>
+          <p><strong>Difficulty:</strong> ${package.difficulty}</p>
+          <p><strong>Max Altitude:</strong> ${package.maxAltitude}</p>
+        </div>
+        ${package.itinerary}
+      `;
+
+      modal.style.display = 'block';
+    }
+
+    function closeModal() {
+      document.getElementById('itineraryModal').style.display = 'none';
+    }
+
+    // Close modal when clicking outside
+    window.onclick = function (event) {
+      const modal = document.getElementById('itineraryModal');
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    }
+
+    // Credential modal logic
+    function showCredentialModal(imgSrc) {
+      var modal = document.getElementById('credentialModal');
+      var modalImg = document.getElementById('credentialModalImg');
+      modalImg.src = imgSrc;
+      modal.style.display = 'block';
+    }
+    function closeCredentialModal() {
+      document.getElementById('credentialModal').style.display = 'none';
+    }
+    // Close credential modal when clicking outside
+    window.addEventListener('click', function (event) {
+      var modal = document.getElementById('credentialModal');
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+
+</html>
