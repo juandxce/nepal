@@ -50,6 +50,9 @@ body {
 .nav-links a:hover {
   color: #38bdf8;
 }
+.hamburger {
+  display: none;
+}
 
 /* Hero Section */
 .hero {
@@ -165,6 +168,7 @@ body {
   text-decoration: none;
   font-weight: 500;
   transition: background 0.2s;
+  cursor: pointer;
 }
 .card-btn:hover {
   background: #0ea5e9;
@@ -447,5 +451,96 @@ footer {
   .contact-links {
     flex-direction: column;
     gap: 1.5rem;
+  }
+}
+
+/* Media Queries for Mobile Navigation */
+@media (max-width: 767px) {
+  .nav-content {
+    justify-content: space-between;
+  }
+  .hamburger {
+    display: block;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 101;
+  }
+  .hamburger-icon {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: #fff;
+    border-radius: 3px;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    margin: 0 auto;
+  }
+  .hamburger-icon::before,
+  .hamburger-icon::after {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 3px;
+    background: #fff;
+    border-radius: 3px;
+    transition: all 0.3s ease-in-out;
+    left: 0;
+  }
+  .hamburger-icon::before {
+    transform: translateY(-8px);
+  }
+  .hamburger-icon::after {
+    transform: translateY(8px);
+  }
+
+  .hamburger.toggle .hamburger-icon {
+    background: transparent;
+  }
+  .hamburger.toggle .hamburger-icon::before {
+    transform: translateY(0px) rotate(45deg);
+  }
+  .hamburger.toggle .hamburger-icon::after {
+    transform: translateY(0px) rotate(-45deg);
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 70%;
+    background: #1e293b;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 99;
+  }
+  .nav-links.nav-active {
+    transform: translateX(0%);
+  }
+  .nav-links li {
+    opacity: 0;
+  }
+  .nav-links.nav-active li {
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out 0.3s;
+  }
+
+  .mobile-menu-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 98;
+    display: none; /* Hidden by default */
+  }
+  .mobile-menu-backdrop.active {
+    display: block;
   }
 }

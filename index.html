@@ -12,6 +12,9 @@
   <nav class="navbar">
     <div class="container nav-content">
       <div class="logo"><a href="#home" style="color:inherit; text-decoration:none;">Hiking Nepal</a></div>
+      <button class="hamburger" aria-label="Toggle navigation menu">
+        <span class="hamburger-icon"></span>
+      </button>
       <ul class="nav-links">
         <li><a href="#home">Home</a></li>
         <li><a href="#packages">Packages</a></li>
@@ -20,6 +23,7 @@
       </ul>
     </div>
   </nav>
+  <div class="mobile-menu-backdrop"></div>
 
   <header class="hero" id="home">
     <div class="container hero-content">
@@ -42,19 +46,19 @@
             <button class="card-btn" onclick="showItinerary('everest')">Read More</button>
           </div>
           <div class="card">
-            <img src="images/annapurna.jpg" alt="Annapurna Circuit" />
+            <img src="images/annapurna.webp" alt="Annapurna Circuit" />
             <h3>Annapurna Circuit</h3>
             <p>Circle the Annapurna massif through lush forests and mountain passes. 16 days.</p>
             <button class="card-btn" onclick="showItinerary('annapurna')">Read More</button>
           </div>
           <div class="card">
-            <img src="images/langtang.jpg" alt="Langtang Valley" />
+            <img src="images/langtang-valley.jpg" alt="Langtang Valley" />
             <h3>Langtang Valley</h3>
             <p>Scenic trek close to Kathmandu with rich Tamang culture. 10 days.</p>
             <button class="card-btn" onclick="showItinerary('langtang')">Read More</button>
           </div>
           <div class="card">
-            <img src="images/mustang.jpg" alt="Upper Mustang" />
+            <img src="images/Upper-Mustang-Trek.jpg" alt="Upper Mustang" />
             <h3>Upper Mustang</h3>
             <p>Explore the hidden kingdom of Mustang, its caves, and unique landscapes. 12 days.</p>
             <button class="card-btn" onclick="showItinerary('mustang')">Read More</button>
@@ -65,11 +69,9 @@
 
     <section class="about-section" id="about">
       <div class="container about-flex">
-        <div class="about-credentials">
-          <img src="images/safal-certificate.jpg" alt="Credential 1" class="about-credential-img"
-            onclick="showCredentialModal('images/safal-certificate.jpg')" style="cursor:pointer;" />
-          <img src="images/credential.jpeg" alt="Credential 2" class="about-credential-img"
-            onclick="showCredentialModal('images/credential.jpeg')" style="cursor:pointer;" />
+        <div class="about-guide">
+          <img src="images/safal.jpg" alt="Your Guide" class="about-guide-img" />
+          <p class="guide-caption">Safal, Lead Guide</p>
         </div>
         <div class="about-description">
           <h2>About Us</h2>
@@ -78,9 +80,10 @@
             certified, experienced, and dedicated to your safety and enjoyment. Join us for an unforgettable
             journey!</p>
         </div>
-        <div class="about-guide">
-          <img src="images/safal.jpg" alt="Your Guide" class="about-guide-img" />
-          <p class="guide-caption">Safal, Lead Guide</p>
+        <div class="about-credentials">
+          <img src="images/safal-certificate.jpg" alt="Credential 1" class="about-credential-img"
+            onclick="showCredentialModal('images/safal-certificate.jpg')" style="cursor:pointer;" />
+          <p class="guide-caption">Guide certificate</p>
         </div>
       </div>
     </section>
@@ -421,6 +424,49 @@
       if (event.target === modal) {
         modal.style.display = 'none';
       }
+    });
+
+    // Hamburger menu logic
+    const hamburgerButton = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    const mobileMenuBackdrop = document.querySelector('.mobile-menu-backdrop');
+
+    hamburgerButton.addEventListener('click', () => {
+      navLinks.classList.toggle('nav-active');
+      hamburgerButton.classList.toggle('toggle');
+      mobileMenuBackdrop.classList.toggle('active');
+    });
+
+    mobileMenuBackdrop.addEventListener('click', () => {
+      navLinks.classList.remove('nav-active');
+      hamburgerButton.classList.remove('toggle');
+      mobileMenuBackdrop.classList.remove('active');
+    });
+
+    // Close mobile menu when a nav link is clicked and adjust scroll
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault(); // Prevent default anchor click behavior
+        
+        // Close mobile menu if open
+        if (navLinks.classList.contains('nav-active')) {
+          navLinks.classList.remove('nav-active');
+          hamburgerButton.classList.remove('toggle');
+          mobileMenuBackdrop.classList.remove('active');
+        }
+
+        // Get the target section and calculate scroll position
+        const targetId = this.getAttribute('href').substring(1);
+        const targetSection = document.getElementById(targetId);
+        const navbarHeight = document.querySelector('.navbar').offsetHeight || 60; // Fallback to 60px
+        const offset = 0; // Additional offset
+        const scrollPosition = targetSection.offsetTop - navbarHeight - offset;
+
+        window.scrollTo({
+          top: scrollPosition,
+          behavior: 'smooth'
+        });
+      });
     });
   </script>
 </body>
